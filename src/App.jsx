@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import './App.css';
+import React, { useState } from "react";
+import axios from "axios";
+import "./App.css";
 
 const App = () => {
-  const [targetImageUrl, setTargetImageUrl] = useState('');
-  const [sourceImageUrl, setSourceImageUrl] = useState('');
-  const [resultImageUrl, setResultImageUrl] = useState('');
+  const [targetImageUrl, setTargetImageUrl] = useState("");
+  const [sourceImageUrl, setSourceImageUrl] = useState("");
+  const [resultImageUrl, setResultImageUrl] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleFaceSwap = async () => {
@@ -13,18 +13,18 @@ const App = () => {
       TargetImageUrl: targetImageUrl,
       SourceImageUrl: sourceImageUrl,
       MatchGender: true,
-      MaximumFaceSwapNumber: 5
+      MaximumFaceSwapNumber: 5,
     });
 
     const config = {
-      method: 'post',
-      url: 'https://faceswap-image-transformation-api.p.rapidapi.com/faceswapgroup',
+      method: "post",
+      url: "https://faceswap-image-transformation-api.p.rapidapi.com/faceswapgroup",
       headers: {
-        'x-rapidapi-key': import.meta.env.VITE_API_KEY,
-        'x-rapidapi-host': 'faceswap-image-transformation-api.p.rapidapi.com',
-        'Content-Type': 'application/json'
+        "x-rapidapi-key": import.meta.env.VITE_API_KEY,
+        "x-rapidapi-host": "faceswap-image-transformation-api.p.rapidapi.com",
+        "Content-Type": "application/json",
       },
-      data: data
+      data: data,
     };
 
     setLoading(true);
@@ -33,7 +33,7 @@ const App = () => {
       const response = await axios(config);
       setResultImageUrl(response.data.ResultImageUrl);
     } catch (error) {
-      console.error('Error during face swap:', error);
+      console.error("Error during face swap:", error);
     } finally {
       setLoading(false);
     }
@@ -51,11 +51,11 @@ const App = () => {
           <div className="image-container">
             <label>
               Target Image URL:
-              <input 
-                type="text" 
-                value={targetImageUrl} 
-                onChange={(e) => setTargetImageUrl(e.target.value)} 
-                placeholder="Enter Target Image URL" 
+              <input
+                type="text"
+                value={targetImageUrl}
+                onChange={(e) => setTargetImageUrl(e.target.value)}
+                placeholder="Enter Target Image URL"
               />
             </label>
             {targetImageUrl && (
@@ -68,11 +68,11 @@ const App = () => {
           <div className="image-container">
             <label>
               Source Image URL:
-              <input 
-                type="text" 
-                value={sourceImageUrl} 
-                onChange={(e) => setSourceImageUrl(e.target.value)} 
-                placeholder="Enter Source Image URL" 
+              <input
+                type="text"
+                value={sourceImageUrl}
+                onChange={(e) => setSourceImageUrl(e.target.value)}
+                placeholder="Enter Source Image URL"
               />
             </label>
             {sourceImageUrl && (
@@ -84,8 +84,11 @@ const App = () => {
           </div>
         </div>
         <div className="swap-button-container">
-          <button onClick={handleFaceSwap} disabled={loading || !targetImageUrl || !sourceImageUrl}>
-            {loading ? 'Processing...' : 'Swap Faces'}
+          <button
+            onClick={handleFaceSwap}
+            disabled={loading || !targetImageUrl || !sourceImageUrl}
+          >
+            {loading ? "Processing..." : "Swap Faces"}
           </button>
         </div>
         {resultImageUrl && (
@@ -97,10 +100,23 @@ const App = () => {
       </div>
       <footer className="footer">
         <p>
-          2024 made with ❤️ by <a href="https://twitter.com/vedant.time" target="_blank" rel="noopener noreferrer">@vedant.time</a>
+          2024 made with ❤️ by{" "}
+          <a
+            href="https://twitter.com/vedant.time"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            @vedant.time
+          </a>
         </p>
         <p>
-          <a href="https://github.com/codderv006/face-swap-api" target="_blank" rel="noopener noreferrer">GitHub Repo</a>
+          <a
+            href="https://github.com/codderv006/face-swap-api"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GitHub Repo
+          </a>
         </p>
       </footer>
     </div>
